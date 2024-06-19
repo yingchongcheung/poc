@@ -25,10 +25,10 @@ jobs:
       id: terrascan
       uses: accurics/terrascan-action@main
       with:
-        iac_type: 'terraform'
+        iac_type: 'terraform,cloudformation'
         iac_version: 'v14'
         policy_type: 'aws'
-        only_warn: true
+        only_warn: false
         #scm_token: ${{ secrets.ACCESS_TOKEN }}
         #verbose: true
         #sarif_upload: true
@@ -52,5 +52,20 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: example/examplea
-          framework: terraform 
+
+          directory: 'Templates/'
+          framework: terraform, cloudformation
+          fail_on: high, medium
+          soft_fail: false
+  kics_job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run KICS
+        id: kics
+        uses: Checkmarx/kics-github-action@v2.1.0
+        with: 
+          path: "Templates/" 
+          platform_type: "terraform, cloudformation"
+          fail_on: "high,medium"
+
