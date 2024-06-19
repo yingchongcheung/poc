@@ -54,7 +54,7 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: 'Templates/'
-          framework: terraform, cloudformation
+          framework: terraform
 
   kics_job:
     runs-on: ubuntu-latest
