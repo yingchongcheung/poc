@@ -22,5 +22,5 @@ Resources:
           ToPort: 80
           # CidrIp: 0.0.0.0/0
           CidrIp: 192.168.178.0/24
-          #Description: 'Allow HTTP traffic from anywhere'
+
         
