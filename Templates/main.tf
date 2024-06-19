@@ -6,13 +6,6 @@ terraform {
     }
   }
 }
-# provider "aws" {
-#     access_key = "ASIA5FTY622APRLMU3NR"
-#     secret_key = "MxrDUWiox7+8LonwH5ckgmSj+w2qlLNgoSvbZFQz"
-#     region = "us-east-1"
-#     token = "FwoGZXIvYXdzEK3//////////wEaDJ9yyoi2Itqed1ut4SLPAZ0+1pVSbSwVi693i9SV6InMdSLU/qp+vtcUpG8E9FGIQgw1gYJRy3TWGEYh2/H6GW2xLMx90jkoe5KmlmJ82blkXF/zgKRwyUaEzstfia+GLrLWZjz9eDGnZwGoOOL3gPE2i5MdcDOQIag/ogx1a2AuURX4OvCv2Q1WZYzVr5WI4DwTHJTJDhZwSWx/tT08AtBiMK/04Nl3Hj3D2qoHDat6GAtHfCVbRwllaR4tYDEf7CJat/gQMQugti2IIQWaDDvsWKh4RtIe2LdB2IvDfijE9J2vBjItQUPcX3K6JEk6eKeE/OW4Sd4qXz2QlzEbZXWNLF9AbZelveGmbDPbsZG2Hrtv"
-# }
-
 module "vpc" {
     #source = "terraform-aws-modules/vpc/aws"
     #version = "5.5.2"
