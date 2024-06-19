@@ -1,18 +1,15 @@
-Resources:
-  MyDB0:
-    Type: 'AWS::RDS::DBInstance'
+
+resources:
+  EC2Instance:
+    Type: 'AWS::EC2::Instance'
     Properties:
-      DBName: 'mydb'
-      DBInstanceClass: 'db.t3.micro'
-      Engine: 'mysql'
-      MasterUsername: 'master'
-      MasterUserPassword: 'password'
-  MyDB1:
-    Type: 'AWS::RDS::DBInstance'
-    Properties:
-      DBName: 'mydb'
-      DBInstanceClass: 'db.t3.micro'
-      Engine: 'mysql'
-      MasterUsername: 'master'
-      MasterUserPassword: 'password'
-      StorageEncrypted: false
+     availabilityZone: us-east-1a
+      imageId: ami-0c55b159cbfafe1f0
+      instanceType: t2.micro
+      keyName: mykey
+      securityGroups:
+        - mysg
+      subnetId: subnet-0ecac448
+      tags:
+        - Key: Name
+          Value: MyInstance
