@@ -15,9 +15,9 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  terrascan_job:
+  terrascan_job_terraform:
     runs-on: ubuntu-latest
-    name: terrascan-action
+    name: terrascan-action-terraform
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -31,7 +31,7 @@ jobs:
         only_warn: true
         #scm_token: ${{ secrets.ACCESS_TOKEN }}
         #verbose: true
-        #sarif_upload: true
+        #sarif_upload: trues
         #non_recursive:
         iac_dir: Templates/
         #policy_path:
@@ -40,7 +40,32 @@ jobs:
         #find_vulnerabilities: true
         #webhook_url:
         #webhook_token:
-        
+  
+  terrascan_job_cloudformation:
+    runs-on: ubuntu-latest
+    name: terrascan-action-cloudformation
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Run Terrascan
+      id: terrascan
+      uses: accurics/terrascan-action@main
+      with:
+        iac_type: 'cloudformation'
+        iac_version: 'v14'
+        policy_type: 'aws'
+        only_warn: true
+        #scm_token: ${{ secrets.ACCESS_TOKEN }}
+        #verbose: true
+        #sarif_upload: true
+        #non_recursive:
+        iac_dir: cloudformation/
+        #policy_path:
+        #skip_rules:
+        #config_path:
+        #find_vulnerabilities: true
+        #webhook_url:
+        #webhook_token:
   checkov_terrafrom_job:
     runs-on: ubuntu-latest
     steps:
