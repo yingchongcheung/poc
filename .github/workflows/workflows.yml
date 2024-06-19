@@ -80,8 +80,6 @@ jobs:
         with:
           directory: 'Templates/'
           framework: terraform  # Kan niet 2 frameworks tegelijk gebruiken
-        outputs:
-          checkov_results: Templates/results.sarif
           
   
   checkov_cloudformation_job:
