@@ -32,7 +32,7 @@ jobs:
         sarif_upload: true
         #iac_dir: Templates/
     - name: Upload SARIF
-      uses: github/codeql-action/upload-sarif@v2
+      uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: terrascan.sarif
         
