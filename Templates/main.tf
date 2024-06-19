@@ -11,7 +11,7 @@ module "vpc" {
     #version = "5.5.2"
     source = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=26c38a66f12e7c6c93b6a2ba127ad68981a48671"  # commit hash of version 5.0.0
     
-    name = "Lab VPC"
+    name = "Lab VPC test"
     cidr = "10.200.0.0/16"
 
     azs = ["us-east-1a", "us-east-1b"]
