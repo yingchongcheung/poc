@@ -68,8 +68,9 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: 'Templates/'
+          directory: 'cloudformation/'
           framework: cloudformation  
+
 
 
   kics_job:
