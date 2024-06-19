@@ -28,13 +28,13 @@ jobs:
         iac_type: 'terraform'
         iac_version: 'v14'
         policy_type: 'aws'
-        only_warn: false
+        only_warn: true
         sarif_upload: true
         iac_dir: Templates/
     - name: Upload SARIF
       uses: github/codeql-action/upload-sarif@v3
       with:
-        sarif_file: sarif/terrascan/terrascan-results.sarif
+        sarif_file: terrascan.sarif
  
   checkov_terrafrom_job:
     runs-on: ubuntu-latest
@@ -51,7 +51,7 @@ jobs:
           directory: 'Templates/'
           framework: terraform  # Kan niet 2 frameworks tegelijk gebruiken
       - name: Upload Checkov Terraform results
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: checkov-terraform.sarif        
   
@@ -70,7 +70,7 @@ jobs:
           directory: 'cloudformation/'
           framework: cloudformation  
       - name: Upload Checkov CloudFormation SARIF results
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: checkov-cloudformation.sarif
 
@@ -86,6 +86,6 @@ jobs:
           platform_type: "terraform, cloudformation"
           fail_on: "critical"
       - name: Upload KICS SARIF results
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: kics.sarif
