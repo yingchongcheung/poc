@@ -109,5 +109,5 @@ jobs:
         with: 
           path: "Templates/" 
           platform_type: "terraform, cloudformation"
-
+          fail_on: "critical"
 
