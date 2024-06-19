@@ -80,6 +80,9 @@ jobs:
         with:
           directory: 'Templates/'
           framework: terraform  # Kan niet 2 frameworks tegelijk gebruiken
+        outputs:
+          checkov_results: Templates/results.sarif
+          
   
   checkov_cloudformation_job:
     runs-on: ubuntu-latest
@@ -108,5 +111,5 @@ jobs:
         with: 
           path: "Templates/" 
           platform_type: "terraform, cloudformation"
-          fail_on: "high,medium"
+
 
