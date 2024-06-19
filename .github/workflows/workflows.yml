@@ -17,7 +17,7 @@ on:
 jobs:
   terrascan_job_terraform:
     runs-on: ubuntu-latest
-    name: terrascan-action-terraform
+    name: terrascan-action
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
