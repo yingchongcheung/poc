@@ -85,6 +85,7 @@ jobs:
           path: "Terraform/, cloudformation/" 
           platform_type: "terraform, cloudformation"
           fail_on: "critical"
+          output_path: "kics.sarif"
       - name: Upload KICS SARIF results
         uses: github/codeql-action/upload-sarif@v3
         with:
