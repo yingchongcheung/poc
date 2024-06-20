@@ -78,8 +78,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: mkdir kics-results-dir
-        run: mkdir -p kics-results-dir
       - name: Run KICS
         id: kics
         uses: Checkmarx/kics-github-action@v2.1.0
@@ -87,8 +85,8 @@ jobs:
           path: "Terraform/, cloudformation/" 
           platform_type: "terraform, cloudformation"
           fail_on: "critical"
-          output_path: "kics-results-dir"
+          output_path: "results.sarif"
       - name: Upload KICS SARIF results
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: kics-results-dir/kics-scan-results.sarif
+          sarif_file: results.sarif
