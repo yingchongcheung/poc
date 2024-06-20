@@ -26,6 +26,7 @@ jobs:
       uses: accurics/terrascan-action@main
       with:
         iac_type: 'terraform'
+        iac_dir: 'Terraform/'
         iac_version: 'v14'
         policy_type: 'aws'
         only_warn: true
@@ -48,7 +49,7 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: 'Templates/'
+          directory: Terraform/
           framework: terraform  # Kan niet 2 frameworks tegelijk gebruiken
       - name: Upload Checkov Terraform results
         uses: github/codeql-action/upload-sarif@v3
@@ -67,7 +68,6 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: 'cloudformation/'
           framework: cloudformation  
       - name: Upload Checkov CloudFormation SARIF results
         uses: github/codeql-action/upload-sarif@v3
@@ -82,7 +82,7 @@ jobs:
         id: kics
         uses: Checkmarx/kics-github-action@v2.1.0
         with: 
-          path: "Templates/, cloudformation/" 
+          path: "Terraform/, cloudformation/" 
           platform_type: "terraform, cloudformation"
           fail_on: "critical"
       - name: Upload KICS SARIF results
