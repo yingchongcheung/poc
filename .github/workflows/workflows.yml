@@ -50,12 +50,15 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: Terraform/
-          framework: terraform  # Kan niet 2 frameworks tegelijk gebruiken
-      - name: Upload Checkov Terraform results
+          framework: terraform
+          output_format: 'sarif'
+          output_file_path: 'checkov_terraform.sarif'
+      - name: Upload Checkov SARIF results
         uses: github/codeql-action/upload-sarif@v3
+        if: success() || failure()
         with:
-          sarif_file: checkov-terraform.sarif        
-  
+          sarif_file: checkov_terraform.sarif
+          
   checkov_cloudformation_job:
     runs-on: ubuntu-latest
     steps:
@@ -68,11 +71,15 @@ jobs:
         id: checkov
         uses: bridgecrewio/checkov-action@master
         with:
-          framework: cloudformation  
-      - name: Upload Checkov CloudFormation SARIF results
+          directory: CloudFormation/
+          framework: cloudformation
+          output_format: 'sarif'
+          output_file_path: 'checkov_cloudformation.sarif'
+      - name: Upload Checkov SARIF results
         uses: github/codeql-action/upload-sarif@v3
+        if: success() || failure()
         with:
-          sarif_file: checkov-cloudformation.sarif
+          sarif_file: checkov_cloudformation.sarif  
 
   kics_job:
     runs-on: ubuntu-latest
@@ -84,11 +91,11 @@ jobs:
         id: kics
         uses: Checkmarx/kics-github-action@v2.1.0
         with: 
-          path: "Terraform/" 
+          path: "Terraform/, CloudFormation/" 
           fail_on: "critical"
           ignore_on_exit: results
           output_path: results-dir
-          platform_type: "terraform"
+          platform_type: "terraform, cloudformation"
           output_formats: "json,sarif"
           exclude_paths: "terraform/gcp/big_data.tf,terraform/azure"
           exclude_queries: "0437633b-daa6-4bbc-8526-c0d2443b946e"
