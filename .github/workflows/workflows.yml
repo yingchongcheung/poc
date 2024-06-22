@@ -81,7 +81,7 @@ jobs:
         with:
           sarif_file: checkov_cloudformation.sarif  
 
-  kics_job:
+  kics_terraform_job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -103,6 +103,33 @@ jobs:
         run: |
           cat results-dir/results.json
           cat results-dir/results.sarif
+      - name: Upload KICS SARIF results
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: results-dir/results.sarif
+  
+  kics_cloudformation_job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Mkdir results-dir
+        run: mkdir -p results-dir
+      - name: Run KICS
+        id: kics
+        uses: Checkmarx/kics-github-action@v2.1.0
+        with:
+          path: "CloudFormation/"
+          fail_on: "critical"
+          ignore_on_exit: results
+          output_path: results-dir
+          platform_type: "cloudformation"
+          output_formats: "json,sarif"
+          exclude_paths: "terraform/gcp/big_data.tf,terraform/azure"
+          exclude_queries: "0437633b-daa6-4bbc-8526-c0d2443b946e"
+      - name: show results:
+        run: |
+          cat results-dir/results.json
+          cat results-dir/results.sarif 
       - name: Upload KICS SARIF results
         uses: github/codeql-action/upload-sarif@v3
         with:
